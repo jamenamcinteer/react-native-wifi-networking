@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Button, StyleSheet, Text } from 'react-native';
-import WifiManager from 'react-native-wifi-reborn';
-import { Section } from './Section';
+import {useEffect, useState} from 'react';
+import {Button, StyleSheet, Text} from 'react-native';
+import WifiManager from 'react-native-wifi-networking';
+import {Section} from './Section';
 
 export const CurrentSSID = () => {
   const [ssid, setSsid] = useState('fetching...');
@@ -10,7 +10,7 @@ export const CurrentSSID = () => {
     setSsid('fetching...');
     WifiManager.getCurrentWifiSSID()
       .then(setSsid)
-      .catch((e) => setSsid(e.toString()));
+      .catch(e => setSsid(e.toString()));
   };
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export const CurrentSSID = () => {
 };
 
 const styles = StyleSheet.create({
-  text: {    
+  text: {
     color: '#000',
   },
 });

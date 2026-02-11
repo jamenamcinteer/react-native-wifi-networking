@@ -1,7 +1,13 @@
-import { useState } from 'react';
-import { Button, TextInput, StyleSheet, Text, ActivityIndicator } from 'react-native';
-import WifiManager from 'react-native-wifi-reborn';
-import { Section } from './Section';
+import {useState} from 'react';
+import {
+  Button,
+  TextInput,
+  StyleSheet,
+  Text,
+  ActivityIndicator,
+} from 'react-native';
+import WifiManager from 'react-native-wifi-networking';
+import {Section} from './Section';
 
 export const ConnectToSSID = () => {
   const [ssid, setSsid] = useState('SSID');
@@ -15,8 +21,8 @@ export const ConnectToSSID = () => {
     setResponse('');
     setIsLoading(true);
     WifiManager.connectToProtectedSSID(ssid, pass, false, false)
-      .then((r) => setResponse(JSON.stringify(r, null, 2)))
-      .catch((e) => setError(e.toString()))
+      .then(r => setResponse(JSON.stringify(r, null, 2)))
+      .catch(e => setError(e.toString()))
       .finally(() => setIsLoading(false));
   };
 
@@ -54,7 +60,7 @@ const styles = StyleSheet.create({
   error: {
     color: 'red',
   },
-  text: {    
+  text: {
     color: '#000',
   },
 });

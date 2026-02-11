@@ -1,18 +1,8 @@
-# react-native-wifi-reborn
-
-[![ISC License](https://img.shields.io/badge/license-ISC-blue.svg)](./LICENSE)
-[![Current npm package version](http://img.shields.io/npm/v/react-native-wifi-reborn.svg)](https://npmjs.org/package/react-native-wifi-reborn)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-brightgreen.svg)](https://github.com/JuanSeBestia/react-native-wifi-reborn/graphs/commit-activity)
-[![Semantic Release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release#how-does-it-work)
-[![Downloads](http://img.shields.io/npm/dm/react-native-wifi-reborn.svg)](https://npmjs.org/package/react-native-wifi-reborn)
-[![Total downloads](http://img.shields.io/npm/dt/react-native-wifi-reborn.svg?label=total%20downloads)](https://npmjs.org/package/react-native-wifi-reborn)
-[![Follow @JuanSeBestia](https://img.shields.io/twitter/follow/JuanSeBestia.svg?label=Follow%20@JuanSeBestia)](https://twitter.com/intent/follow?screen_name=JuanSeBestia)
-
-This project is based on the no longer maintained [react-native-wifi](https://github.com/robwalkerco/react-native-wifi).
+# react-native-wifi-networking
 
 ## Getting started
 
-`$ npm install react-native-wifi-reborn`
+`$ npm install react-native-wifi-networking`
 
 ### ⚪iOS requirements
 
@@ -53,7 +43,7 @@ const granted = await PermissionsAndroid.request(
   },
 );
 if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-  // You can now use react-native-wifi-reborn
+  // You can now use react-native-wifi-networking
 } else {
   // Permission denied
 }
@@ -66,13 +56,13 @@ This library is correctly autolinked on React Native 60+ 🎉.
 <details>
   <summary>Manual linking (for React Native 0.59 and below)</summary>
 
-  Run: `react-native link react-native-wifi-reborn`
+  Run: `react-native link react-native-wifi-networking`
 
   ⚪**iOS**
   
   1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
 
-  2. Go to `node_modules` ➜ `react-native-wifi-reborn` and add `RNWifi.xcodeproj`
+  2. Go to `node_modules` ➜ `react-native-wifi-networking` and add `RNWifi.xcodeproj`
 
   3. In XCode, in the project navigator, select your project. Add `libRNWifi.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
 
@@ -88,13 +78,13 @@ This library is correctly autolinked on React Native 60+ 🎉.
 
   4. Append the following lines to `android/settings.gradle`:
 
-    include ':react-native-wifi-reborn'
+    include ':react-native-wifi-networking'
     
-    project(':react-native-wifi-reborn').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-wifi-reborn/android')
+    project(':react-native-wifi-networking').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-wifi-networking/android')
 
   5. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
  
-    implementation project(':react-native-wifi-reborn')
+    implementation project(':react-native-wifi-networking')
 
 </details>
 
@@ -112,7 +102,7 @@ After installing this npm package, add the [config plugin](https://docs.expo.io/
         "NSLocalNetworkUsageDescription": "The app requires access to the local network so it can..."
       }
     },
-    "plugins": ["react-native-wifi-reborn"]
+    "plugins": ["react-native-wifi-networking"]
   }
 }
 ```
@@ -131,7 +121,7 @@ The plugin provides props for extra customization. Every time you change the pro
 {
   "plugins": [
     [
-      "react-native-wifi-reborn",
+      "react-native-wifi-networking",
       {
         "fineLocationPermission": false
       }
@@ -143,7 +133,7 @@ The plugin provides props for extra customization. Every time you change the pro
 ## Usage then/catch
 
 ```js
-import WifiManager from "react-native-wifi-reborn";
+import WifiManager from "react-native-wifi-networking";
 
 WifiManager.connectToProtectedSSID(ssid, password, isWep, isHidden).then(
   () => {
@@ -166,7 +156,7 @@ WifiManager.getCurrentWifiSSID().then(
 
 ## Usage async/await
 ```js
-import WifiManager from "react-native-wifi-reborn";
+import WifiManager from "react-native-wifi-networking";
 
 async function main(ssid, password, isWep, isHidden) {
   try {

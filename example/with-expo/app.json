@@ -29,7 +29,7 @@
       "package": "com.rnwifi.withexpo"
     },
     "plugins": [
-      "react-native-wifi-reborn"
+      "react-native-wifi-networking"
     ]
   }
 }

@@ -1,62 +1,62 @@
 import { useState } from 'react';
 import { Button, TextInput, StyleSheet, Text, ActivityIndicator } from 'react-native';
-import WifiManager from 'react-native-wifi-reborn';
+import WifiManager from 'react-native-wifi-networking';
 import { Section } from './Section';
 
 export const ConnectToSSID = () => {
-  const [ssid, setSsid] = useState('SSID');
-  const [pass, setPass] = useState('password');
-  const [error, setError] = useState('');
-  const [response, setResponse] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+    const [ssid, setSsid] = useState('SSID');
+    const [pass, setPass] = useState('password');
+    const [error, setError] = useState('');
+    const [response, setResponse] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
-  const handleConnect = () => {
-    setError('');
-    setResponse('');
-    setIsLoading(true);
-    WifiManager.connectToProtectedWifiSSID({
-      ssid: ssid,
-      password: pass,
-      isWEP: false,
-      isHidden: false,
-      timeout: 10,
-    })
-      .then((r) => setResponse(JSON.stringify(r, null, 2)))
-      .catch((e) => setError(e.toString()))
-      .finally(() => setIsLoading(false));
-  };
+    const handleConnect = () => {
+        setError('');
+        setResponse('');
+        setIsLoading(true);
+        WifiManager.connectToProtectedWifiSSID({
+            ssid: ssid,
+            password: pass,
+            isWEP: false,
+            isHidden: false,
+            timeout: 10,
+        })
+            .then((r) => setResponse(JSON.stringify(r, null, 2)))
+            .catch((e) => setError(e.toString()))
+            .finally(() => setIsLoading(false));
+    };
 
-  return (
-    <Section title="Connect to SSID">
-      <TextInput style={styles.textInput} value={ssid} onChangeText={setSsid} />
-      <TextInput style={styles.textInput} value={pass} onChangeText={setPass} />
-      <Button title="Connect" onPress={handleConnect} disabled={isLoading} />
-      {isLoading ? (
-        <ActivityIndicator />
-      ) : (
-        <>
-          <Text style={styles.error}>{error}</Text>
-          <Text>{response}</Text>
-        </>
-      )}
-    </Section>
-  );
+    return (
+        <Section title="Connect to SSID">
+            <TextInput style={styles.textInput} value={ssid} onChangeText={setSsid} />
+            <TextInput style={styles.textInput} value={pass} onChangeText={setPass} />
+            <Button title="Connect" onPress={handleConnect} disabled={isLoading} />
+            {isLoading ? (
+                <ActivityIndicator />
+            ) : (
+                <>
+                    <Text style={styles.error}>{error}</Text>
+                    <Text>{response}</Text>
+                </>
+            )}
+        </Section>
+    );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    gap: 12,
-    backgroundColor: '#fff',
-    padding: 12,
-    borderRadius: 10,
-  },
-  textInput: {
-    borderWidth: 1,
-    borderColor: '#e5e5ea',
-    padding: 4,
-    borderRadius: 4,
-  },
-  error: {
-    color: 'red',
-  },
+    container: {
+        gap: 12,
+        backgroundColor: '#fff',
+        padding: 12,
+        borderRadius: 10,
+    },
+    textInput: {
+        borderWidth: 1,
+        borderColor: '#e5e5ea',
+        padding: 4,
+        borderRadius: 4,
+    },
+    error: {
+        color: 'red',
+    },
 });

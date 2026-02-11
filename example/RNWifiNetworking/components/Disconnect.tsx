@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { Button, StyleSheet, Text } from 'react-native';
-import WifiManager from 'react-native-wifi-reborn';
-import { Section } from './Section';
+import {useState} from 'react';
+import {Button, StyleSheet, Text} from 'react-native';
+import WifiManager from 'react-native-wifi-networking';
+import {Section} from './Section';
 
 export const Disconnect = () => {
   const [error, setError] = useState('');
@@ -11,8 +11,8 @@ export const Disconnect = () => {
     setError('');
 
     WifiManager.disconnect()
-      .then((r) => setResponse(JSON.stringify(r, null, 2)))
-      .catch((e) => setError(e.toString()));
+      .then(r => setResponse(JSON.stringify(r, null, 2)))
+      .catch(e => setError(e.toString()));
   };
 
   return (
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   error: {
     color: 'red',
   },
-  text: {    
+  text: {
     color: '#000',
   },
 });
