@@ -45,7 +45,7 @@
     "url": "https://github.com/jamenamcinteer/react-native-wifi-networking/issues"
   },
   "homepage": "https://github.com/jamenamcinteer/react-native-wifi-networking#readme",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.8.3",
     "@expo/config-plugins": "^4.0.7",
