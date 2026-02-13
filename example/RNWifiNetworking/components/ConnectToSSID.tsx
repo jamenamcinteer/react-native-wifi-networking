@@ -6,7 +6,7 @@ import {
   Text,
   ActivityIndicator,
 } from 'react-native';
-import WifiManager from 'react-native-wifi-networking';
+import WifiManager from '@reactnativelabs/wifi-networking';
 import {Section} from './Section';
 
 export const ConnectToSSID = () => {

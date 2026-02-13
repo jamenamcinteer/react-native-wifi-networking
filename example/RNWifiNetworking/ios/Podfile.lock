@@ -1189,7 +1189,7 @@ DEPENDENCIES:
   - React-runtimescheduler (from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`)
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - RNWifi (from `../node_modules/react-native-wifi-networking`)
+  - RNWifi (from `../node_modules/@reactnativelabs/wifi-networking`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -1305,7 +1305,7 @@ EXTERNAL SOURCES:
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
   RNWifi:
-    :path: "../node_modules/react-native-wifi-networking"
+    :path: "../node_modules/@reactnativelabs/wifi-networking"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 

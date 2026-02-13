@@ -1,8 +1,8 @@
-# react-native-wifi-networking
+# @reactnativelabs/wifi-networking
 
 ## Getting started
 
-`$ npm install react-native-wifi-networking`
+`$ npm install @reactnativelabs/wifi-networking`
 
 ### ⚪iOS requirements
 
@@ -43,7 +43,7 @@ const granted = await PermissionsAndroid.request(
   },
 );
 if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-  // You can now use react-native-wifi-networking
+  // You can now use wifi-networking
 } else {
   // Permission denied
 }
@@ -56,13 +56,13 @@ This library is correctly autolinked on React Native 60+ 🎉.
 <details>
   <summary>Manual linking (for React Native 0.59 and below)</summary>
 
-  Run: `react-native link react-native-wifi-networking`
+  Run: `react-native link @reactnativelabs/wifi-networking`
 
   ⚪**iOS**
   
   1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
 
-  2. Go to `node_modules` ➜ `react-native-wifi-networking` and add `RNWifi.xcodeproj`
+  2. Go to `node_modules` ➜ `@reactnativelabs/wifi-networking` and add `RNWifi.xcodeproj`
 
   3. In XCode, in the project navigator, select your project. Add `libRNWifi.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
 
@@ -78,13 +78,13 @@ This library is correctly autolinked on React Native 60+ 🎉.
 
   4. Append the following lines to `android/settings.gradle`:
 
-    include ':react-native-wifi-networking'
+    include ':wifi-networking'
     
-    project(':react-native-wifi-networking').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-wifi-networking/android')
+    project(':wifi-networking').projectDir = new File(rootProject.projectDir, 	'../node_modules/wifi-networking/android')
 
   5. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
  
-    implementation project(':react-native-wifi-networking')
+    implementation project(':wifi-networking')
 
 </details>
 
@@ -102,7 +102,7 @@ After installing this npm package, add the [config plugin](https://docs.expo.io/
         "NSLocalNetworkUsageDescription": "The app requires access to the local network so it can..."
       }
     },
-    "plugins": ["react-native-wifi-networking"]
+    "plugins": ["wifi-networking"]
   }
 }
 ```
@@ -121,7 +121,7 @@ The plugin provides props for extra customization. Every time you change the pro
 {
   "plugins": [
     [
-      "react-native-wifi-networking",
+      "wifi-networking",
       {
         "fineLocationPermission": false
       }
@@ -133,7 +133,7 @@ The plugin provides props for extra customization. Every time you change the pro
 ## Usage then/catch
 
 ```js
-import WifiManager from "react-native-wifi-networking";
+import WifiManager from "@reactnativelabs/wifi-networking";
 
 WifiManager.connectToProtectedSSID(ssid, password, isWep, isHidden).then(
   () => {
@@ -156,7 +156,7 @@ WifiManager.getCurrentWifiSSID().then(
 
 ## Usage async/await
 ```js
-import WifiManager from "react-native-wifi-networking";
+import WifiManager from "@reactnativelabs/wifi-networking";
 
 async function main(ssid, password, isWep, isHidden) {
   try {

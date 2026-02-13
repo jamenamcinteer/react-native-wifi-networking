@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button, StyleSheet, Text } from 'react-native';
-import WifiManager from 'react-native-wifi-networking';
+import WifiManager from '@reactnativelabs/wifi-networking';
 import { Section } from './Section';
 
 export const Disconnect = () => {

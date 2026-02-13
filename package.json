@@ -1,15 +1,31 @@
 {
-  "name": "react-native-wifi-networking",
+  "name": "@reactnativelabs/wifi-networking",
   "version": "0.0.1",
   "description": "A react-native implementation for viewing and connecting to Wifi networks on Android and iOS devices.",
-  "types": "lib/types/index.d.ts",
+  "keywords": [
+    "react",
+    "react-native",
+    "android",
+    "ios",
+    "wifi",
+    "connect"
+  ],
+  "homepage": "https://github.com/jamenamcinteer/react-native-wifi-networking#readme",
+  "bugs": {
+    "url": "https://github.com/jamenamcinteer/react-native-wifi-networking/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamenamcinteer/react-native-wifi-networking.git"
+  },
+  "license": "MIT",
+  "author": "Jamena McInteer",
+  "type": "commonjs",
   "main": "src/index.js",
-  "scripts": {
-    "lint": "eslint src/ lib/ plugin/ --ext .js,.jsx,.ts,.tsx",
-    "test": "echo \"No test specified\" && exit 0",
-    "build:plugin": "tsc --build plugin",
-    "checkjs": "tsc",
-    "semantic-release": "semantic-release"
+  "types": "lib/types/index.d.ts",
+  "directories": {
+    "example": "example",
+    "lib": "lib"
   },
   "files": [
     "app.plugin.js",
@@ -24,28 +40,13 @@
     "/*.podspec",
     "/jest"
   ],
-  "keywords": [
-    "react",
-    "react-native",
-    "android",
-    "ios",
-    "wifi",
-    "connect"
-  ],
-  "author": "",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jamenamcinteer/react-native-wifi-networking.git"
+  "scripts": {
+    "lint": "eslint src/ lib/ plugin/ --ext .js,.jsx,.ts,.tsx",
+    "test": "echo \"No test specified\" && exit 0",
+    "build:plugin": "tsc --build plugin",
+    "checkjs": "tsc",
+    "semantic-release": "semantic-release"
   },
-  "peerDependencies": {
-    "react-native": ">=0.13"
-  },
-  "dependencies": {},
-  "bugs": {
-    "url": "https://github.com/jamenamcinteer/react-native-wifi-networking/issues"
-  },
-  "homepage": "https://github.com/jamenamcinteer/react-native-wifi-networking#readme",
-  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.8.3",
     "@expo/config-plugins": "^4.0.7",
@@ -62,5 +63,8 @@
     "react-native": "^0.61.5",
     "semantic-release": "^23.0.2",
     "typescript": "^3.8.2"
+  },
+  "peerDependencies": {
+    "react-native": ">=0.13"
   }
 }
