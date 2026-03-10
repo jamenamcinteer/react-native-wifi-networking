@@ -400,3 +400,7 @@ It is important to disable it again after using as even when the app disconnects
 ## Conventions
 
 * Angular JS Git Commit conventions are used, [read more](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#recognizing-unimportant-commits)
+
+## Contributing
+
+Contributions are welcome! Use the example app in `example/with-expo` to test changes. To run the android build, you will need to use Java 17. If using Homebrew, install by running `brew install openjdk@17`.
