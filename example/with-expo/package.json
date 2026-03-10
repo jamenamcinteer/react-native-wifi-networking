@@ -8,7 +8,12 @@
     "android": "expo run:android --device",
     "ios": "expo run:ios --device",
     "clean:ios": "rm -rf ios && expo prebuild --platform ios",
-    "clean:android": "rm -rf android && expo prebuild --platform android"
+    "clean:android": "rm -rf android && expo prebuild --platform android",
+    "check-expo": "expo install --check",
+    "switch-versions": "node scripts/switch-versions.js",
+    "use:rn-0.76": "node scripts/switch-versions.js rn-0.76",
+    "use:next": "node scripts/switch-versions.js next",
+    "use:latest": "node scripts/switch-versions.js latest"
   },
   "dependencies": {
     "expo": "~50.0.8",

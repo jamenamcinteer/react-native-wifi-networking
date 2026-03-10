@@ -1,0 +1,58 @@
+{
+  "configurations": {
+    "rn-0.76": {
+      "description": "React Native 0.76 with Expo 52",
+      "dependencies": {
+        "expo": "~52.0.47",
+        "expo-status-bar": "~2.0.1",
+        "expo-location": "~18.0.7",
+        "expo-splash-screen": "~0.29.22",
+        "react": "~18.3.1",
+        "react-native": "~0.76.9"
+      },
+      "devDependencies": {
+        "@types/react": "~18.3.12"
+      }
+    },
+    "next": {
+      "description": "Latest canary versions",
+      "dependencies": {
+        "expo": "^55.0.0-canary-20251127-587bc53",
+        "expo-status-bar": "~2.2.3",
+        "expo-location": "~18.1.5",
+        "expo-splash-screen": "~0.30.6",
+        "react": "19.2.0",
+        "react-native": "0.83.0-rc.3"
+      },
+      "devDependencies": {
+        "@types/react": "~19.2.7"
+      }
+    },
+    "latest": {
+      "description": "Latest stable versions",
+      "dependencies": {
+        "expo": "~55.0.5",
+        "expo-status-bar": "~2.2.3",
+        "expo-location": "~18.1.5",
+        "expo-splash-screen": "~0.30.6",
+        "react": "19.2.0",
+        "react-native": "0.83.2"
+      },
+      "devDependencies": {
+        "@types/react": "~19.2.14"
+      }
+    }
+  },
+  "managedPackages": [
+    "expo",
+    "expo-status-bar",
+    "expo-location",
+    "expo-splash-screen",
+    "react",
+    "react-native",
+    "@types/react"
+  ],
+  "preservedPackages": [
+    "@reactnativelabs/wifi-networking"
+  ]
+}
