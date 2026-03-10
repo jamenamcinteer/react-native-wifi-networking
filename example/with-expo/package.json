@@ -8,7 +8,7 @@
     "android": "expo run:android --device",
     "ios": "expo run:ios --device",
     "clean:ios": "expo prebuild --platform ios",
-    "clean:android": "rm -rf android/.gradle android/build && expo prebuild --platform android",
+    "clean:android": "rm -rf android/.expo android/.gradle android/build && expo prebuild --platform android",
     "check-expo": "expo install --check",
     "switch-versions": "node scripts/switch-versions.js",
     "use:rn-0.76": "node scripts/switch-versions.js rn-0.76",
