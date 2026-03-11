@@ -1,0 +1,36 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "prebuild": "expo prebuild",
+    "start": "expo start",
+    "android": "expo run:android --device",
+    "ios": "expo run:ios --device",
+    "clean": "rm -rf ios android .expo node_modules yarn-error.log",
+    "check-expo": "expo install --check",
+    "switch-versions": "node scripts/switch-versions.js",
+    "use:rn-0.76": "node scripts/switch-versions.js rn-0.76",
+    "use:next": "node scripts/switch-versions.js next",
+    "use:latest": "node scripts/switch-versions.js latest",
+    "test-version:android:rn-0.76": "yarn clean && yarn && yarn use:rn-0.76 yarn android",
+    "test-version:android:next": "yarn clean && yarn && yarn use:next && yarn android",
+    "test-version:android:latest": "yarn clean && yarn use:latest && yarn android",
+    "test-version:ios:rn-0.76": "yarn clean && yarn use:rn-0.76 && yarn ios",
+    "test-version:ios:next": "yarn clean && yarn use:next && yarn ios",
+    "test-version:ios:latest": "yarn clean && yarn use:latest && yarn ios"
+  },
+  "dependencies": {
+    "@reactnativelabs/wifi-networking": "file:..",
+    "expo": "~55.0.5",
+    "expo-location": "^55.1.2",
+    "expo-status-bar": "^55.0.4",
+    "react": "19.2.0",
+    "react-native": "0.83.2"
+  },
+  "devDependencies": {
+    "@types/react": "~19.2.2",
+    "typescript": "~5.9.2"
+  },
+  "private": true
+}
