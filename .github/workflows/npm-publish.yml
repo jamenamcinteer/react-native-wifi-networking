@@ -4,71 +4,72 @@
 name: Node.js Package
 
 on:
-  release:
-    types: [created]
-  workflow_dispatch: # Optional: Allow manual trigger
+    release:
+        types: [created]
+    workflow_dispatch: # Optional: Allow manual trigger
 
 permissions:
-  id-token: write # Required for OIDC
-  contents: read
+    id-token: write # Required for OIDC
+    contents: read
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    build:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
 
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
 
-      - name: Build project
-        run: yarn prepare
+            - name: Build project
+              run: yarn build:plugin
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: package
-          path: |
-            bin
-            android
-            ios
-            package.json
+            - name: Upload build artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                  name: package
+                  path: |
+                      plugin
+                      lib
+                      android
+                      ios
+                      package.json
 
-  publish:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write # Required for OIDC authentication
-      contents: read
-      packages: write
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    publish:
+        needs: build
+        runs-on: ubuntu-latest
+        permissions:
+            id-token: write # Required for OIDC authentication
+            contents: read
+            packages: write
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-      - name: Setup Node.js for npm auth
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          registry-url: 'https://registry.npmjs.org'
+            - name: Setup Node.js for npm auth
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  registry-url: 'https://registry.npmjs.org'
 
-      - name: Upgrade npm (OIDC support)
-        run: npm install -g npm@latest
+            - name: Upgrade npm (OIDC support)
+              run: npm install -g npm@latest
 
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: package
+            - name: Download build artifacts
+              uses: actions/download-artifact@v4
+              with:
+                  name: package
 
-      - name: Publish to npm
-        run: npm publish
+            - name: Publish to npm
+              run: npm publish
