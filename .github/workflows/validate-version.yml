@@ -1,178 +1,172 @@
 name: Validate Expo/React Native Versions
 
 on:
-  push:
-    branches:
-      - next-release # runs on direct pushes to next-release
-  pull_request:
-    branches:
-      - main # runs on PRs targeting main
-  workflow_dispatch: # Optional: Allow manual trigger
+    push:
+        branches:
+            - next-release # runs on direct pushes to next-release
+    pull_request:
+        branches:
+            - main # runs on PRs targeting main
+    workflow_dispatch: # Optional: Allow manual trigger
 
 permissions:
-  contents: read # Allows actions/checkout to read the repository
-  pull-requests: read # Required to read PR metadata (e.g., PR title, author)
+    contents: read # Allows actions/checkout to read the repository
+    pull-requests: read # Required to read PR metadata (e.g., PR title, author)
 
 jobs:
-  build-android-latest:
-    runs-on: macos-latest
+    build-android-latest:
+        runs-on: macos-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-      - name: Set up Java 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+            - name: Set up Java 17
+              uses: actions/setup-java@v4
+              with:
+                  java-version: '17'
+                  distribution: 'temurin'
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
 
-      - name: Install example dependencies
-        run: |
-          cd example/with-expo
-          yarn install --frozen-lockfile
+            - name: Install example dependencies
+              run: |
+                  cd example
+                  yarn install --frozen-lockfile
 
-      - name: Build Android - Latest
-        run: |
-          cd example/with-expo
-          yarn clean:android
-          keytool -genkey -v -keystore android/app/debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
-          cd android
-          ./gradlew assembleDebug
+            - name: Build Android - Latest
+              run: |
+                  cd example/android
+                  ./gradlew assembleDebug
 
-  build-ios-latest:
-    runs-on: macos-latest
+    build-ios-latest:
+        runs-on: macos-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
 
-      - name: Install example dependencies
-        run: |
-          cd example/with-expo
-          yarn install --frozen-lockfile
+            - name: Install example dependencies
+              run: |
+                  cd example
+                  yarn install --frozen-lockfile
 
-      - name: Build iOS - Latest
-        run: |
-          cd example/with-expo
-          yarn clean:ios
+            - name: Build iOS - Latest
+              run: |
+                  cd example
+                  yarn prebuild:ios
 
-  build-android-rn-076:
-    runs-on: macos-latest
+    build-android-rn-076:
+        runs-on: macos-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-      - name: Set up Java 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+            - name: Set up Java 17
+              uses: actions/setup-java@v4
+              with:
+                  java-version: '17'
+                  distribution: 'temurin'
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
 
-      - name: Install example dependencies
-        run: |
-          cd example/with-expo
-          yarn install --frozen-lockfile
+            - name: Install example dependencies
+              run: |
+                  cd example
+                  yarn install --frozen-lockfile
 
-      - name: Build Android - Expo 52 (RN 0.76)
-        run: |
-          cd example/with-expo
-          yarn use:rn-0.76
-          yarn clean:android
-          keytool -genkey -v -keystore android/app/debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
-          cd android
-          ./gradlew assembleDebug
+            - name: Build Android - Expo 52 (RN 0.76)
+              run: |
+                  cd example
+                  yarn use:rn-0.76
+                  cd android
+                  ./gradlew assembleDebug
 
-  build-ios-rn-076:
-    runs-on: macos-latest
+    build-ios-rn-076:
+        runs-on: macos-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
 
-      - name: Install example dependencies
-        run: |
-          cd example/with-expo
-          yarn install --frozen-lockfile
+            - name: Install example dependencies
+              run: |
+                  cd example
+                  yarn install --frozen-lockfile
 
-      - name: Build iOS - Expo 52 (RN 0.76)
-        run: |
-          cd example/with-expo
-          yarn use:rn-0.76
-          yarn clean:ios
+            - name: Build iOS - Expo 52 (RN 0.76)
+              run: |
+                  cd example
+                  yarn use:rn-0.76
+                  yarn prebuild:ios
 
-  build-android-next:
-    runs-on: macos-latest
+    build-android-next:
+        runs-on: macos-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-      - name: Set up Java 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+            - name: Set up Java 17
+              uses: actions/setup-java@v4
+              with:
+                  java-version: '17'
+                  distribution: 'temurin'
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
 
-      - name: Install example dependencies
-        run: |
-          cd example/with-expo
-          yarn install --frozen-lockfile
+            - name: Install example dependencies
+              run: |
+                  cd example
+                  yarn install --frozen-lockfile
 
-      - name: Build Android - Next (Canary)
-        run: |
-          cd example/with-expo
-          yarn use:next
-          yarn clean:android
-          keytool -genkey -v -keystore android/app/debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
-          cd android
-          ./gradlew assembleDebug
+            - name: Build Android - Next (Canary)
+              run: |
+                  cd example
+                  yarn use:next
+                  yarn clean:android
+                  cd android
+                  ./gradlew assembleDebug
 
-  build-ios-next:
-    runs-on: macos-latest
+    build-ios-next:
+        runs-on: macos-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
 
-      - name: Install example dependencies
-        run: |
-          cd example/with-expo
-          yarn install --frozen-lockfile
+            - name: Install example dependencies
+              run: |
+                  cd example/with-expo
+                  yarn install --frozen-lockfile
 
-      - name: Build iOS - Next (Canary)
-        run: |
-          cd example/with-expo
-          yarn use:next
-          yarn clean:ios
+            - name: Build iOS - Next (Canary)
+              run: |
+                  cd example/with-expo
+                  yarn use:next
+                  yarn prebuild:ios
