@@ -63,14 +63,13 @@ jobs:
 
             - name: Install example dependencies
               run: |
-                  cd example/with-expo
+                  cd example
                   yarn install --frozen-lockfile
 
             - name: Build Android
               run: |
-                  cd example/with-expo
-                  yarn clean:android
-                  keytool -genkey -v -keystore android/app/debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+                  cd example
+                  yarn prebuild:android
                   cd android
                   ./gradlew assembleDebug
 
@@ -89,10 +88,10 @@ jobs:
 
             - name: Install example dependencies
               run: |
-                  cd example/with-expo
+                  cd example
                   yarn install --frozen-lockfile
 
             - name: Build iOS
               run: |
-                  cd example/with-expo
-                  yarn clean:ios
+                  cd example
+                  yarn prebuild:ios
