@@ -1,6 +1,6 @@
 {
   "name": "@reactnativelabs/wifi-networking",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A react-native implementation for viewing and connecting to Wifi networks on Android and iOS devices.",
   "keywords": [
     "react",
