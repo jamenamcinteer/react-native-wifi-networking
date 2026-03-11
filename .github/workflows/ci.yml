@@ -86,7 +86,7 @@ jobs:
 
             - name: Install example dependencies
               run: |
-                  cd example/with-expo
+                  cd example
                   yarn install --frozen-lockfile
 
             - name: Build iOS
