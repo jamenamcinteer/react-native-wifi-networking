@@ -39,7 +39,9 @@ jobs:
 
             - name: Build Android - Latest
               run: |
-                  cd example/android
+                  cd example
+                  yarn prebuild:android
+                  cd android
                   ./gradlew assembleDebug
 
     build-ios-latest:
@@ -91,6 +93,7 @@ jobs:
               run: |
                   cd example
                   yarn use:rn-0.76
+                  yarn prebuild:android
                   cd android
                   ./gradlew assembleDebug
 
@@ -144,7 +147,7 @@ jobs:
               run: |
                   cd example
                   yarn use:next
-                  yarn clean:android
+                  yarn prebuild:android
                   cd android
                   ./gradlew assembleDebug
 
