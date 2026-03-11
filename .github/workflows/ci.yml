@@ -68,7 +68,9 @@ jobs:
 
             - name: Build Android
               run: |
-                  cd example/android
+                  cd example
+                  yarn prebuild:android
+                  cd android
                   ./gradlew assembleDebug
 
     build-ios:
