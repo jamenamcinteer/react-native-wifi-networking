@@ -154,6 +154,14 @@ WifiManager.getCurrentWifiSSID().then(
 );
 ```
 
+## TypeScript Support
+
+This library includes complete TypeScript definitions. All methods, parameters, return types, and error enums are fully typed. Import the types you need:
+
+```typescript
+import WifiManager, { WiFiObject, SuggestedNetworkConfig, CONNECT_ERRORS } from "@reactnativelabs/wifi-networking";
+```
+
 ## Usage async/await
 ```js
 import WifiManager from "@reactnativelabs/wifi-networking";
@@ -267,18 +275,136 @@ Returns the SSID of the current WiFi network.
 
 The following methods work only on iOS
 
-###  `connectToSSID(ssid: string): Promise`
+### `connectToSSID(ssid: string): Promise<void>`
 
-###  `connectToSSIDPrefix(ssid: string): Promise`
+Connects to an open (unsecured) WiFi network.
 
-### `disconnectFromSSID(ssid: string): Promise`
+#### ssid
+Type: `string`
+The SSID of the WiFi network to connect to.
 
-### `connectToProtectedSSIDOnce(SSID: string, password: string, isWEP: boolean, joinOnce: boolean): Promise`
+```javascript
+WifiManager.connectToSSID("OpenNetwork").then(
+  () => {
+    console.log("Connected to open network!");
+  },
+  (error) => {
+    console.log("Connection failed:", error);
+  }
+);
+```
 
-### `connectToProtectedSSIDPrefix(SSIDPrefix: string, password: string, isWep: boolean): Promise`
+### `connectToSSIDPrefix(SSIDPrefix: string): Promise<void>`
 
-### `connectToProtectedSSIDPrefixOnce(SSIDPrefix: string, password: string, isWep: boolean, joinOnce: boolean): Promise`
+Connects to a WiFi network whose SSID matches the given prefix. If multiple networks match the prefix, iOS selects the one with the strongest signal.
 
+#### SSIDPrefix
+Type: `string`
+A prefix string to match against WiFi network SSIDs.
+
+```javascript
+WifiManager.connectToSSIDPrefix("MyDevice_").then(
+  () => {
+    console.log("Connected to network matching prefix!");
+  },
+  (error) => {
+    console.log("Connection failed:", error);
+  }
+);
+```
+
+### `disconnectFromSSID(ssid: string): Promise<void>`
+
+Disconnects from and removes the configuration for the specified WiFi network.
+
+#### ssid
+Type: `string`
+The SSID of the WiFi network to disconnect from and remove.
+
+```javascript
+WifiManager.disconnectFromSSID("NetworkToRemove").then(
+  () => {
+    console.log("Disconnected and removed network configuration!");
+  },
+  (error) => {
+    console.log("Disconnect failed:", error);
+  }
+);
+```
+
+### `connectToProtectedSSIDOnce(SSID: string, password: string, isWEP: boolean, joinOnce: boolean): Promise<void>`
+
+Connects to a protected WiFi network with option to limit connection lifetime.
+
+#### SSID
+Type: `string`
+The SSID of the WiFi network to connect to.
+
+#### password
+Type: `string`
+The password of the WiFi network to connect with.
+
+#### isWEP
+Type: `boolean`
+If `true`, the network is WEP Wi-Fi; otherwise it is a WPA or WPA2 personal Wi-Fi network.
+
+#### joinOnce
+Type: `boolean`
+When set to `true`, restricts the configuration lifetime to the operating status of the app that created it.
+
+```javascript
+// Connect with temporary configuration that's removed when app goes to background
+WifiManager.connectToProtectedSSIDOnce("TempNetwork", "password123", false, true).then(
+  () => {
+    console.log("Connected with temporary configuration!");
+  },
+  (error) => {
+    console.log("Connection failed:", error);
+  }
+);
+```
+
+### `connectToProtectedSSIDPrefix(SSIDPrefix: string, password: string, isWep: boolean): Promise<void>`
+
+Connects to a protected WiFi network whose SSID matches the given prefix.
+
+#### SSIDPrefix
+Type: `string`
+A prefix string to match the SSID of a Wi-Fi network.
+
+#### password
+Type: `string`
+The password of the WiFi network to connect with.
+
+#### isWep
+Type: `boolean`
+If `true`, the network is WEP Wi-Fi; otherwise it is a WPA or WPA2 personal Wi-Fi network.
+
+```javascript
+WifiManager.connectToProtectedSSIDPrefix("MyDevice_", "password123", false).then(
+  () => {
+    console.log("Connected to protected network with matching prefix!");
+  },
+  (error) => {
+    console.log("Connection failed:", error);
+  }
+);
+```
+
+### `connectToProtectedSSIDPrefixOnce(SSIDPrefix: string, password: string, isWep: boolean, joinOnce: boolean): Promise<void>`
+Connects to a protected WiFi network whose SSID matches the given prefix, with option to limit connection lifetime.
+
+```javascript
+// Connect to a device network with temporary configuration
+WifiManager.connectToProtectedSSIDPrefixOnce("IoTDevice_", "devicepassword", false, true).then(
+  () => {
+    console.log("Connected to IoT device with temporary configuration!");
+  },
+  (error) => {
+    console.log("Connection failed:", error);
+  }
+);
+```
 Use this function when you want to match a known SSID prefix, but don’t have a full SSID. If the system finds multiple Wi-Fi networks whose SSID string matches the given prefix, it selects the network with the greatest signal strength.
 
 #### SSIDPrefix
@@ -357,6 +483,14 @@ WifiManager.setEnabled(true); //set WiFi ON
 WifiManager.setEnabled(false); //set WiFi OFF
 ```
 
+### `openWifiSettings()`
+
+Opens the WiFi settings panel. This is used for Android Q (API 29) and above where apps can no longer programmatically enable/disable WiFi and must direct users to the settings panel.
+
+```javascript
+WifiManager.openWifiSettings(); // Opens system WiFi settings
+```
+
 ### `connectionStatus(): Promise<boolean>`
 
 Returns if the device is currently connected to a WiFi network.
@@ -383,6 +517,50 @@ If you are connected to that network, it will disconnect.
 
 #### Errors:
 * `locationPermissionMissing`: Starting android 6, location permission needs to be granted for wifi 
+
+### `suggestWifiNetwork(networkConfigs: SuggestedNetworkConfig[]): Promise<string>`
+
+Suggests a list of WiFi networks on Android. This method only works for Android and requires a minimum SDK version of 29 (Android 10). The promise resolves when the suggestions are processed successfully.
+
+#### networkConfigs
+
+Type: `SuggestedNetworkConfig[]`
+
+An array of network configuration objects with the following properties:
+- `ssid: string` - The SSID of the WiFi network
+- `password?: string` - Optional password for the network
+- `isWpa3?: boolean` - Optional flag to indicate if the network uses WPA3 security
+- `isAppInteractionRequired?: boolean` - Optional flag to indicate if user interaction is required
+
+```javascript
+const networkConfigs = [
+  { 
+    ssid: "MyNetwork", 
+    password: "mypassword", 
+    isWpa3: false, 
+    isAppInteractionRequired: false 
+  }
+];
+WifiManager.suggestWifiNetwork(networkConfigs).then(
+  result => {
+    console.log("Network suggestions added:", result);
+  },
+  error => {
+    console.error("Failed to add network suggestions:", error);
+  }
+);
+```
+
+#### Return values:
+* `"suggestions_added"` - Suggestions were successfully added
+* `"suggestions_already_added"` - Suggestions were already present (treated as success)
+
+#### Errors:
+* `unableToConnect` - Various error conditions:
+  * Maximum number of network suggestions exceeded for this app
+  * Internal error occurred while adding network suggestions
+  * App is not allowed to add network suggestions
+  * Failed to add network suggestions for other reasons
 
 ### `forceWifiUsage(useWifi: boolean): Promise<void>`
 Deprecated; see forceWifiUsageWithOptions.

@@ -111,7 +111,7 @@ declare module '@reactnativelabs/wifi-networking' {
         /**
          * Used on iOS. If `true`, the network is WEP Wi-Fi; otherwise it is a WPA or WPA2 personal Wi-Fi network.
          */
-        isWEP?: boolean;
+        isWep?: boolean;
         /**
          * only for Android, use if Wi-Fi is hidden.
          */
@@ -210,7 +210,7 @@ declare module '@reactnativelabs/wifi-networking' {
         connectToProtectedSSID(
             SSID: string,
             password: string | null,
-            isWEP: boolean,
+            isWep: boolean,
             isHidden: boolean
         ): Promise<void>;
 
@@ -239,7 +239,7 @@ declare module '@reactnativelabs/wifi-networking' {
 
         connectToSSID(SSID: string): Promise<void>;
         connectToSSIDPrefix(SSIDPrefix: string): Promise<void>;
-        disconnectFromSSID(SSIDPrefix: string): Promise<void>;
+        disconnectFromSSID(SSID: string): Promise<void>;
 
         /**
          * Connects to a WiFi network, with option to limit connection lifetime. Rejects with an error if it couldn't connect.
@@ -252,7 +252,7 @@ declare module '@reactnativelabs/wifi-networking' {
         connectToProtectedSSIDOnce(
             SSID: string,
             password: string | null,
-            isWEP: boolean,
+            isWep: boolean,
             joinOnce: boolean
         ): Promise<void>;
 
@@ -266,7 +266,7 @@ declare module '@reactnativelabs/wifi-networking' {
         connectToProtectedSSIDPrefix(
             SSIDPrefix: string,
             password: string,
-            isWEP: boolean
+            isWep: boolean
         ): Promise<void>;
 
         /**
@@ -280,7 +280,7 @@ declare module '@reactnativelabs/wifi-networking' {
         connectToProtectedSSIDPrefixOnce(
             SSIDPrefix: string,
             password: string | null,
-            isWEP: boolean,
+            isWep: boolean,
             joinOnce: boolean
         ): Promise<void>;
 
@@ -304,6 +304,12 @@ declare module '@reactnativelabs/wifi-networking' {
         isEnabled(): Promise<boolean>;
 
         setEnabled(enabled: boolean): void;
+
+        /**
+         * Use this to open a wifi settings panel.
+         * For Android Q and above.
+         */
+        openWifiSettings(): void;
 
         /**
          * Returns if the device is currently connected to a WiFi network.
