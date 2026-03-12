@@ -231,7 +231,7 @@ public class RNWifiModule extends ReactContextBaseJavaModule {
 
     /**
      * Use this to connect with a wifi network.
-     * Example:  wifi.findAndConnect(ssid, password, false);
+     * Example:  wifi.findAndConnect(ssid, password, false, false);
      * The promise will resolve with the message 'connected' when the user is connected on Android.
      *
      * @param SSID     name of the network to connect with
@@ -242,6 +242,28 @@ public class RNWifiModule extends ReactContextBaseJavaModule {
      */
     @ReactMethod
     public void connectToProtectedSSID(@NonNull final String SSID, @NonNull final String password, final boolean isWep, final boolean isHidden, final Promise promise) {
+        connectToProtectedSSIDInternal(SSID, password, isWep, isHidden, TIMEOUT_MILLIS, promise);
+    }
+
+    /**
+     * Use this to connect with a wifi network with custom timeout.
+     * Example:  wifi.findAndConnect(ssid, password, false, false, 30000);
+     * The promise will resolve with the message 'connected' when the user is connected on Android.
+     *
+     * @param SSID     name of the network to connect with
+     * @param password password of the network to connect with
+     * @param isWep    only for iOS
+     * @param isHidden only for Android, use if WiFi is hidden
+     * @param timeout  timeout in milliseconds, defaults to TIMEOUT_MILLIS if 0 or negative
+     * @param promise  to send success/error feedback
+     */
+    @ReactMethod
+    public void connectToProtectedSSID(@NonNull final String SSID, @NonNull final String password, final boolean isWep, final boolean isHidden, final int timeout, final Promise promise) {
+        final int actualTimeout = timeout > 0 ? timeout : TIMEOUT_MILLIS;
+        connectToProtectedSSIDInternal(SSID, password, isWep, isHidden, actualTimeout, promise);
+    }
+
+    private void connectToProtectedSSIDInternal(@NonNull final String SSID, @NonNull final String password, final boolean isWep, final boolean isHidden, final int timeout, final Promise promise) {
         if(!assertLocationPermissionGranted(promise)){
             return;
         }
@@ -250,9 +272,9 @@ public class RNWifiModule extends ReactContextBaseJavaModule {
             promise.reject(ConnectErrorCodes.couldNotEnableWifi.toString(), "On Android 10, the user has to enable wifi manually.");
             return;
         }
-
+        
         this.removeWifiNetwork(SSID, promise, () -> {
-            connectToWifiDirectly(SSID, password, isHidden, TIMEOUT_MILLIS, promise);
+            connectToWifiDirectly(SSID, password, isHidden, timeout, promise);
         }, TIMEOUT_REMOVE_MILLIS);
     }
 

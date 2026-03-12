@@ -161,6 +161,8 @@ import WifiManager from "@reactnativelabs/wifi-networking";
 async function main(ssid, password, isWep, isHidden) {
   try {
     await WifiManager.connectToProtectedSSID(ssid, password, isWep, isHidden);
+    // Or with custom timeout:
+    await WifiManager.connectToProtectedSSID(ssid, password, isWep, isHidden, 30000);
     console.log("Connected successfully!");
   } catch (error) {
     console.log("Connection failed!");
@@ -199,7 +201,7 @@ Edit also your `AndroidManifest.xml` and add this line into `<application`:
 
 The following methods work on both Android and iOS
 
-### `connectToProtectedSSID(SSID: string, password: string, isWEP: boolean, isHidden: boolean): Promise`
+### `connectToProtectedSSID(SSID: string, password: string, isWEP: boolean, isHidden: boolean, timeout?: number): Promise`
 
 Returns a promise that resolves when connected or rejects with the error when it couldn't connect to the wifi network.
 
@@ -224,6 +226,11 @@ Used on iOS. If true, the network is WEP Wi-Fi; otherwise it is a WPA or WPA2 pe
 
 Type: `boolean`
 Used on Android. If true, the network is a hidden Wi-Fi network.
+
+#### timeout (optional)
+
+Type: `number`
+Timeout in milliseconds. Defaults to 15000 if not provided or if 0 or negative.
 
 ### `connectToProtectedWifiSSID({ ssid: string, password: string, isWEP: boolean, isHidden: boolean, timeout: number }): Promise`
 Same params as above but passed as an object and with a timeout parameter added.
