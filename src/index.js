@@ -1,12 +1,12 @@
-import { NativeModules } from 'react-native';
+const { NativeModules } = require('react-native');
 
 const { WifiManager } = NativeModules;
 
-export const GET_CURRENT_WIFI_SSID_ERRRORS = {
+const GET_CURRENT_WIFI_SSID_ERRRORS = {
     CouldNotDetectSSID: 'CouldNotDetectSSID',
 };
 
-export const CONNECT_ERRORS = {
+const CONNECT_ERRORS = {
     unavailableForOSVersion: 'unavailableForOSVersion',
     invalid: 'invalid',
     invalidSSID: 'invalidSSID',
@@ -27,26 +27,33 @@ export const CONNECT_ERRORS = {
     timeoutOccurred: 'timeoutOccurred',
 };
 
-export const DISCONNECT_ERRORS = {
+const DISCONNECT_ERRORS = {
     couldNotGetWifiManager: 'couldNotGetWifiManager',
     couldNotGetConnectivityManager: 'couldNotGetConnectivityManager',
 };
 
-export const IS_REMOVE_WIFI_NETWORK_ERRORS = {
+const IS_REMOVE_WIFI_NETWORK_ERRORS = {
     locationPermissionMissing: 'locationPermissionMissing',
     couldNotGetWifiManager: 'couldNotGetWifiManager',
     couldNotGetConnectivityManager: 'couldNotGetConnectivityManager',
 };
 
-export const FORCE_WIFI_USAGE_ERRORS = {
+const FORCE_WIFI_USAGE_ERRORS = {
     couldNotGetConnectivityManager: 'couldNotGetConnectivityManager',
 };
 
-export const LOAD_WIFI_LIST_ERRORS = {
+const LOAD_WIFI_LIST_ERRORS = {
     locationPermissionMissing: 'locationPermissionMissing',
     locationServicesOff: 'locationServicesOff',
     jsonParsingException: 'jsonParsingException',
     illegalViewOperationException: 'illegalViewOperationException',
 };
 
-export default WifiManager;
+module.exports = WifiManager;
+module.exports.default = WifiManager;
+module.exports.GET_CURRENT_WIFI_SSID_ERRRORS = GET_CURRENT_WIFI_SSID_ERRRORS;
+module.exports.CONNECT_ERRORS = CONNECT_ERRORS;
+module.exports.DISCONNECT_ERRORS = DISCONNECT_ERRORS;
+module.exports.IS_REMOVE_WIFI_NETWORK_ERRORS = IS_REMOVE_WIFI_NETWORK_ERRORS;
+module.exports.FORCE_WIFI_USAGE_ERRORS = FORCE_WIFI_USAGE_ERRORS;
+module.exports.LOAD_WIFI_LIST_ERRORS = LOAD_WIFI_LIST_ERRORS;
