@@ -20,7 +20,7 @@
   },
   "license": "MIT",
   "author": "Jamena McInteer",
-  "type": "module",
+  "type": "commonjs",
   "main": "src/index.js",
   "types": "lib/types/index.d.ts",
   "directories": {
