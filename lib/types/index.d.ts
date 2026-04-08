@@ -206,12 +206,14 @@ declare module '@reactnativelabs/wifi-networking' {
          * @param password `null` for open networks.
          * @param isWep Used on iOS. If `true`, the network is WEP Wi-Fi; otherwise it is a WPA or WPA2 personal Wi-Fi network.
          * @param isHidden only for Android, use if Wi-Fi is hidden.
+         * @param timeout optional timeout in milliseconds, defaults to 15000.
          */
         connectToProtectedSSID(
             SSID: string,
             password: string | null,
             isWEP: boolean,
-            isHidden: boolean
+            isHidden: boolean,
+            timeout?: number
         ): Promise<void>;
 
         /**
